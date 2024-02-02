@@ -1,7 +1,6 @@
 -- 1 
 timesTen :: Int->Int
 timesTen x=x*10
-
 -- 2
 sumThree :: Int->Int->Int->Int
 sumThree a b c = a+b+c
