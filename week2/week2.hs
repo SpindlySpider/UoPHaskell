@@ -9,7 +9,7 @@ sign :: Int -> Int
 sign number
   | number < 0 = -1
   | number == 0 = 0
-  | number > 0 = 1
+  | otherwise = 1
 
 -- Q3
 howManyEqual :: Int -> Int -> Int -> Int

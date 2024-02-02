@@ -1,0 +1,63 @@
+Q1
+sumThree 3 5 7 
+  3 + 5 + 7     def of sumThree
+  8+7           arithmetic 
+  15            result
+
+sumThree 8 (1 + 3) 2  
+  8 + (1+3) + 2 def of sumThree
+  8 + 4 + 2     arithmetic
+  12 + 2        arithmetic
+  14            result
+---
+Q2
+threeDifferent 1 4 2 
+  1 /= 4 && 1 /= 2 && 4 /= 2  def of threeDifferent 
+  true && 1 /= 2 && 4 /= 2    comparison 
+  true && true && true        comparison 
+  true && true                comparison 
+  true                        result
+
+threeDifferent 1 7 7  
+  1 /= 7 && 1 /= 7 && 7 /= 7  def of threeDifferent 
+  1 /= 7 && 1 /= 7 && false   comparison
+  1 /= 7 && true && false     comparison
+  true && true && false       comparison
+  true && false               comparison
+  false                       result
+---
+Q3
+howManyEqual 3 5 2                              def of howManyEqual
+  | 3 == 5 && 3 == 2 || 3 == 2 && 2 == 1 = 3
+  | 1 == 3 || 1 == 2 || 3 == 2 = 2
+  | otherwise = 0
+
+  | false && false || false && false = 3        comparison
+  | 1 == 3 || 1 == 2 || 3 == 2 = 2
+  | otherwise = 0
+
+  | false          
+  | false || false  || false = 2                comparison
+  | otherwise = 0
+
+  | false          
+  | false               
+  | otherwise = 0                               comparison
+
+  0                                             result
+
+howManyEqual 5 2 5
+  | 5 == 2 && 5 == 5 || 2 == 5 && 5 == 5 = 3    def of howManyEqual
+  | 5 == 2 || 5 == 5 || 2 == 5 = 2
+  | otherwise = 0
+
+  | false && true || false &&  false = 3        comparison 
+  | 5 == 2 || 5 == 5 || 2 == 5 = 2
+  | otherwise = 0
+
+  | false                                        
+  | false || true || false  = 2                 comparison
+  | otherwise = 0
+  
+  | false                                        
+  | true   = 2                                  result
