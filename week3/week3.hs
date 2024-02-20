@@ -37,24 +37,40 @@ False && _ = False
 True && a = a
 
 -- Q2
+-- exOr :: Bool -> Bool -> Bool
+-- exOr True b = not b
+-- exOr a True = not a
+-- exOr a b = False
 exOr :: Bool -> Bool -> Bool
-exOr True b = not b
-exOr a True = not a
-exOr a b = False
+exOr a b = a /= b
+
+-- exOr True b = not b
+-- exOr a True = not a
+-- exOr a b = False
+
+-- this can be done in 2 lines
 
 -- Q3
 ifThenElse :: Bool -> Int -> Int -> Int
 ifThenElse True a _ = a
 ifThenElse _ _ b = b
 
+-- needs another underscore
+
 -- Q4
 daysInMonth :: Int -> Int
-daysInMonth m
-  | m == 2 = 28
-  | m < 8 && m `mod` 2 == 0 = 30
-  | m < 8 = 31
-  | m `mod` 2 == 0 = 31
-  | otherwise = 30
+daysInMonth 2 = 28
+daysInMonth 4 = 30
+daysInMonth 6 = 30
+daysInMonth 9 = 30
+daysInMonth 11 = 30
+daysInMonth _ = 31
+
+-- \| m == 2 = 28
+-- \| m < 8 && m `mod` 2 == 0 = 30
+-- \| m < 8 = 31
+-- \| m `mod` 2 == 0 = 31
+-- \| otherwise = 30
 
 vaildDate :: Int -> Int -> Bool
 vaildDate d m = daysInMonth m >= d
@@ -83,16 +99,23 @@ sumFromTo a b
 
 -- Q9
 absolute :: Int -> Int
-absolute number = if number < 0 then 0 - number else number
+absolute number = if number < 0 then -number else number
 
 -- from first worksheet
 gcd :: Int -> Int -> Int
 gcd a b
   | a == b = a
-  | a > b = gcd diff b
-  | otherwise = gcd diff a
-  where
-    diff = absolute (a - b)
+  | otherwise = gcd (abs (a - b)) (min a b)
+
+-- gcd a b
+-- \| a == b = a
+-- \| a > b = gcd diff b
+-- \| otherwise = gcd (abs (a - b)) (min a b)
+
+-- where
+--   diff = absolute (a - b)
+
+-- make into 2 lines using min and
 
 -- Q10
 intSquareRoot :: Int -> Int

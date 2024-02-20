@@ -34,58 +34,68 @@ minAndMax x y
   | x <= y = (x, y)
   | otherwise = (y, x)
 
+-- Q1
+sumDifference :: Int -> Int -> (Int, Int)
+sumDifference a b = (a + b, a - b)
 
---Q1
-sumDifference:: Int -> Int -> (Int,Int)
-sumDifference a b = (a+b,a-b)
---Q2
-grade ::StudentMark -> Char 
-grade (_,mk)
+-- Q2
+grade :: StudentMark -> Char
+grade (_, mk)
   | mk > 70 = 'A'
   | mk > 60 = 'B'
   | mk > 50 = 'C'
   | mk > 40 = 'D'
   | otherwise = 'F'
---Q3
+
+-- Q3
 capMark :: StudentMark -> StudentMark
-capMark (name,mk)
-  | mk >= 40 = (name,40)
-  | otherwise = (name,mk) 
---Q4
+capMark (name, mk)
+  | mk >= 40 = (name, 40)
+  | otherwise = (name, mk)
+
+-- Q4
 firstNumbers :: Int -> [Int]
-firstNumbers n 
+firstNumbers n
   | n == 0 = []
-  |otherwise = [1..n] 
---Q5
+  | otherwise = [1 .. n]
+
+-- Q5
 firstSquares :: Int -> [Int]
-firstSquares n = [x^2|x<-[1..n]] 
+firstSquares n = [x ^ 2 | x <- [1 .. n]]
+
 -- lambda function to map to each input
 -- Q6
 capitalise :: String -> String
-capitalise str = [toUpper c|c<-str]
---Q7 
+capitalise str = [toUpper c | c <- str]
+
+-- Q7
 onlyDigits :: String -> String
-onlyDigits str = [c | c<-str, isNumber c ]
---Q8
+onlyDigits str = [c | c <- str, isNumber c]
+
+-- Q8
 capMarks :: [StudentMark] -> [StudentMark]
-capMarks stmk = [capMark st | st <- stmk ]
---Q9
+capMarks stmk = [capMark st | st <- stmk]
+
+-- Q9
 gradeStudents :: [StudentMark] -> [(String, Char)]
-gradeStudents stmk = [(st, grade (" ",mk)) | (st, mk) <- stmk]
---Q10
--- duplicate :: String -> Int -> String 
+gradeStudents stmk = [(st, grade (" ", mk)) | (st, mk) <- stmk]
+
+-- Q10
+duplicate :: String -> Int -> String
 -- duplicate str n = concat [ str | _ <- [1..n] ]
-duplicate :: String -> Int -> String 
-duplicate str n 
+duplicate str n
   | n == 0 = ""
-  | otherwise = str ++ duplicate str (n-1) 
---Q11
+  | otherwise = str ++ duplicate str (n - 1)
+
+-- Q11
 divisors :: Int -> [Int]
-divisors n  = [ i| i <- [1..n], n `mod` i == 0 ]
---Q12
+divisors n = [i | i <- [1 .. n], n `mod` i == 0]
+
+-- Q12
 isprime :: Int -> Bool
-isprime n =  length (divisors(n)) == 2
---Q13
-split:: [(a,b)] -> ([a],[b])
--- split list =  ( map fst list, map snd list) 
-split list = ( [ a | (a,_) <- list ], [ b | (_,b) <- list ] )
+isprime n = length (divisors n) == 2
+
+-- Q13
+split :: [(a, b)] -> ([a], [b])
+-- split list =  ( map fst list, map snd list)
+split list = ([a | (a, _) <- list], [b | (_, b) <- list])

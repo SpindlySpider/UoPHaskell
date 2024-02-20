@@ -20,7 +20,9 @@ howManyEqual a b c
 
 -- Q4
 sumDiagonalLengths :: Float -> Float -> Float -> Float
-sumDiagonalLengths a b c = sqrt (2 * a ^ 2) + sqrt (2 * b ^ 2) + sqrt (2 * c ^ 2)
+sumDiagonalLengths a b c = op a + op b + op c
+  where
+    op x = sqrt (2 * x ^ 2)
 
 -- Q5
 taxiFare :: Int -> Float
@@ -34,15 +36,17 @@ averageThree int1 int2 int3 = fromIntegral (int1 + int2 + int3) / 3
 
 howManyAboveAverage :: Int -> Int -> Int -> Int
 howManyAboveAverage x y z
+  | x == y && y == z = 0
   | average < a && average < b || average < a && average < c || average < b && average < c = 2
-  | average < a || average < b || average < c = 1
-  | otherwise = 0
+  -- \| average < a || average < b || average < c = 1
+  | otherwise = 1
   where
-    average = averageThree x y z
+    average = fromIntegral (x + y + z) / 3
     -- turns into float type
     a = fromIntegral x :: Float
     b = fromIntegral y :: Float
     c = fromIntegral z :: Float
+    f = fromIntegral
 
 -- Q7
 vaildDate :: Int -> Int -> Bool
