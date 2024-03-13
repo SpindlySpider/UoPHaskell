@@ -6,7 +6,7 @@ import Prelude hiding (concat, fst, head, reverse, snd, sum, tail, zip)
 
 -- Definitions of the prelude functions fst and snd
 
-fst (x, _) = x
+fst ( x , _) = x
 
 snd (_, y) = y
 
@@ -69,21 +69,21 @@ duplicateHead [] = []
 duplicateHead (x:xs) = x:x:xs
 --3 
 rotate::[a]->[a]
-rotate [a] = [a]
+-- rotate [] = []
+-- rotate [a] = [a]
 rotate (a:b:cs) = b:a:cs
+rotate xs  = xs
 --4
 listLength::[a] -> Int
 listLength [] = 0 
 listLength (x:xs) = 1 + listLength xs
 --5 
 multAll::[Int]->Int
-multAll [] = 1 
-multAll [a] = a 
+multAll [] = 1  
 multAll (x:xs) = x * multAll xs
 --6
 andAll::[Bool]->Bool
 andAll [] = True
-andAll [a] = a
 andAll (x:xs) = x && andAll xs
 --7
 orAll::[Bool] -> Bool
@@ -97,7 +97,8 @@ countIntegers n (x:xs)
   | otherwise = countIntegers n xs
 --9
 removeAll:: Int -> [Int] -> [Int]
-removeAll n arr = [x| x <- arr , x /= n  ]
+removeAll n arr = [ x| x <- arr , x /= n  ]
+
 --10
 removeAllButFirst::Int -> [Int] -> [Int]
 removeAllButFirst n (x:xs)
@@ -111,13 +112,16 @@ listMarks s ((st,mk) : stmks)
   | otherwise = listMarks s stmks 
 -- 12
 sorted:: [Int] -> Bool
-sorted [a,b] =  a <= b
+-- sorted [a,b] =  a <= b
 sorted ( a : b : xs )
   | a<= b = sorted xs
   | otherwise = False
+sorted _ = True
 -- 13
 prefix :: [Int] -> [Int] -> Bool
-prefix [a] (y:ys) =  a == y  
+-- prefix [a] (y:ys) =  a == y  
+prefix [] _ = True
+prefix _ [] = False
 prefix (x:xs) (y:ys)
   | x == y = prefix xs ys
   | otherwise = False 

@@ -41,12 +41,13 @@ orAll :: [Bool] -> Bool
 orAll xs = foldr (||) False xs
 --4
 sumSqaures :: [Int] -> Int
-sumSqaures xs = foldl (+) 0 (map (^2) xs)
+sumSqaures xs = foldr (+) 0 (map (^2) xs)
+
 --5
 
 
 zeroToTen :: [Int] -> [Int]
-zeroToTen xs = [x|x <- xs ,x>=0 && x <= 10 ]
+zeroToTen xs = [x | x <- xs ,x>=0 && x <= 10 ]
 -- 6 
 squareRoots :: [Float] -> [Float]
 squareRoots xs = map sqrt (filter (\x -> x >= 0) xs)
@@ -57,10 +58,10 @@ countBetween l u xs = foldr (+) 0 [1 | x <- (filter (\x -> x >= l && x <= u ) xs
 alwaysPositive :: (Float -> Float) -> [Float] -> Bool
 alwaysPositive func xs =  all (\x -> x >=0) (map func xs) 
 -- do a couple more
-alwaysPositive func xs = filter (>=0) (map func xs)
+-- alwaysPositive func xs = filter (>=0) (map func xs)
 
-alwaysPositive1 :: (Float -> Float) -> [Float] -> Bool
-alwaysPositive1 func = foldr(\x xs -> func x >=0)  False
+-- alwaysPositive :: (Float -> Float) -> [Float] -> Bool
+-- alwaysPositive func = foldr(\x xs -> func x >=0)  False
 
 --9
 productSquareRoots :: [Float] -> Float 
@@ -74,16 +75,15 @@ removeFirst c (x:xs)
 removeLast :: (a->Bool) -> [a] -> [a]
 removeLast c xs =  reverse (removeFirst c (reverse xs))
 --12
-zeroToTen1 :: [Int] -> [Int]
+zeroToTen1 :: [ Int] -> [Int]
 zeroToTen1 = filter (\x -> x >=0 && 10>= x)
 --13
 --a
-alwaysPositive1 :: (Float -> Float) -> [Float] -> Bool
-alwaysPositive1 func = foldr(\x xs -> func x >=0)  False
+alwaysPositive1 :: ( Float -> Float ) -> [ Float ] -> Bool
+alwaysPositive1 func = foldr(\x xs -> func x >= 0)  False
 --b
 -- productSquareRoots :: [Float] -> Float 
 -- productSquareRoots xs =  foldr (*) 1 (squareRoots xs)
 --c
-reverse1 :: [a]->[a]
+reverse1 :: [a] -> [a]
 reverse1 = foldr (\x xs -> xs ++ [x] ) []
-
