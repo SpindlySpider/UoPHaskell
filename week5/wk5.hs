@@ -113,7 +113,7 @@ listMarks s ((st,mk) : stmks)
 sorted:: [Int] -> Bool
 sorted [a,b] =  a <= b
 sorted ( a : b : xs )
-  | a <= b = sorted xs
+  | a<= b = sorted xs
   | otherwise = False
 -- 13
 prefix :: [Int] -> [Int] -> Bool
