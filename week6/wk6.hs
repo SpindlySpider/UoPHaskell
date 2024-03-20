@@ -32,28 +32,28 @@ myConcat :: [[a]] -> [a]
 myConcat = foldr (++) []
 -- 1
 mult10 :: [Int] -> [Int]
-mult10 (a) = map (*10) a 
+mult10 = map (*10) -------------
 --2
 onlyLowerCase :: String -> String
-onlyLowerCase s =  filter (isLower) s
+onlyLowerCase =  filter isLower -------------------
 --3
 orAll :: [Bool] -> Bool
-orAll xs = foldr (||) False xs
+orAll = foldr (||) False ----------
 --4
 sumSqaures :: [Int] -> Int
-sumSqaures xs = foldr (+) 0 (map (^2) xs)
-
+sumSqaures = foldr (+) 0 . map (^2) -- =================================
 --5
-
-
 zeroToTen :: [Int] -> [Int]
-zeroToTen xs = [x | x <- xs ,x>=0 && x <= 10 ]
+-- zeroToTen xs = filter (\x -> x >=0 && x<=10) xs ---------------------
+-- zeroToTen  = filter (\x -> x >=0 && x<=10)  ---------------------
+zeroToTen = filter (x>=0) . filter (x<=10)
 -- 6 
 squareRoots :: [Float] -> [Float]
 squareRoots xs = map sqrt (filter (\x -> x >= 0) xs)
+-- squareRoots = map . sqrt . filter (\x -> x >= 0) 
 --7 
-countBetween ::  Float -> Float -> [Float] -> Int
-countBetween l u xs = foldr (+) 0 [1 | x <- (filter (\x -> x >= l && x <= u ) xs)]   
+countBetween l u = length . filter (>l) . filter (<u)   
+--countBetween ::  Float -> Float -> [ Float xs] = foldr (+) 0 [1 | x <- (filter (\x -> x >= l && x <= u ) xs)]  
 --8
 alwaysPositive :: (Float -> Float) -> [Float] -> Bool
 alwaysPositive func xs =  all (\x -> x >=0) (map func xs) 
