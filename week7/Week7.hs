@@ -89,6 +89,7 @@ season m
 numberOfday :: Month -> Int -> Int
 numberOfday m y
   | y `mod` 4 == 0 && m == Febuary = 29
+
   | m `elem`  [January,March,May,July,August, October,December] =31
   | m `elem` [April,June,September, Novemeber] = 30
   | otherwise = 28
@@ -96,7 +97,7 @@ numberOfday m y
 data Point = Point Float Float
   deriving (Eq,Show)
 --Q5 
-data PositionedShape =  Shape Point
+data PositionedShape =  PositionedShape (Circle Float) Point | PositionedShape (Rectangle Float) Point
   deriving(Eq,Show)
 --Q6
 move :: PositionedShape -> Float -> Float -> PositionedShape
@@ -124,9 +125,10 @@ inOrder (Node v l r) = inOrder l ++ [v] ++ inOrder r
 inOrder  null = []
 --Q11
 insert :: Int -> Tree -> Tree 
--- insert v (Node nv Null Null)
---   | v < nv = (Node nv (Node v Null Null ) Null)
---   | otherwise = (Node nv Null (Node v Null Null ))
+insert v Null = Node v Null Null
+insert v (Node nv l r)
+  | v < nv = Node nv (insert l) r
+  | otherwise = Node nv l (insert r)
 -- insert v (Node nv Null r)
 --   | v < nv = (Node nv (Node v Null Null) r)
 --   | otherwise = (Node nv Null (insert v r))
@@ -134,10 +136,10 @@ insert :: Int -> Tree -> Tree
 --   | v < nv = (Node nv (insert v l) r)
 --   | otherwise = (Node nv l (insert v r))
 -- insert _ _ = null
-insert v (Node nv Null Null) = if v < nv then (Node nv (Node v Null Null ) Null) else (Node nv Null (Node v Null Null ))
-insert v (Node nv Null r) = if v < nv then (Node nv (Node v Null Null) r) else (Node nv Null (insert v r))
-insert v (Node nv l r) = if v < nv then (Node nv (insert v l) r) else (Node nv l (insert v r))
-insert _ _ = Null
+-- insert v (Node nv Null Null) = if v < nv then (Node nv (Node v Null Null ) Null) else (Node nv Null (Node v Null Null ))
+-- insert v (Node nv Null r) = if v < nv then (Node nv (Node v Null Null) r) else (Node nv Null (insert v r))
+-- insert v (Node nv l r) = if v < nv then (Node nv (insert v l) r) else (Node nv l (insert v r))
+-- insert _ _ = Null
 --Q12
 listToSearchTree :: [Int] -> Tree
 listToSearchTree (x:xs) = foldr insert (Node x Null Null) xs 
