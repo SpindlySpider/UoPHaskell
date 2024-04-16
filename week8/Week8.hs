@@ -118,47 +118,44 @@ startup :: IO()
 startup = do
   rawContent <- readFile "words.txt"
   let content =  read rawContent :: [String]
-  let newlist = addWord "lemon" content
-  displayMenu 
-  getUserChoice
+  getUserChoice content
 
-addWordUser :: IO ()
-addWordUser = do
-  rawContent <- readFile "words.txt"
-  let content =  read rawContent :: [String]
+addWordUser :: [String] -> IO ()
+addWordUser list = do
+  putStr "add new word: "
   rawChoice <- getLine
-  let choice = read rawChoice :: String
-  let newlist = addWord choice content
-  writeFile "words.txt" (show newlist :: String)
-  return ()
+  getUserChoice (addWord rawChoice list)
 
-getUserChoice :: IO()
-getUserChoice = do 
+getUserChoice ::[String] -> IO()
+getUserChoice list = do 
+  displayMenu 
   rawChoice <- getLine
   let choice = read rawChoice :: Int 
   if ( choice  ==  1 )  
-    then addWordUser
+    then addWordUser list 
   else if (choice == 2) 
-    then displayAllWords
+    then displayAllWords list
   else if (choice == 3) 
-    then displayAllWordsOfLength
+    then displayAllWordsOfLength list
   else
-    displayAllWords
+    save list
 
-displayAllWords :: IO ()
-displayAllWords = do
-  rawContent <- readFile "words.txt"
-  let content =  read rawContent :: [String]
-  putStrLn (wordsToString content)
+save :: [String] -> IO ()
+save list = writeFile "words.txt" (show list :: String)
 
-displayAllWordsOfLength :: IO ()
-displayAllWordsOfLength = do
-  rawContent <- readFile "words.txt"
-  let content =  read rawContent :: [String]
+displayAllWords ::[String] -> IO ()
+displayAllWords list = do
+  putStrLn (wordsToString list) 
+  getUserChoice list
+
+
+displayAllWordsOfLength ::[String] -> IO ()
+displayAllWordsOfLength list = do
   putStr "filter by length (enter Int): "
   rawChoice <- getLine
   let choice = read rawChoice :: Int
-  putStrLn (show (wordsOfLength choice content) :: String)
+  putStrLn (show (wordsOfLength choice list) :: String)
+  getUserChoice list
 
 displayMenu :: IO () 
 displayMenu = do 
@@ -166,4 +163,4 @@ displayMenu = do
   putStrLn "2) display all words"
   putStrLn "3) display all words of given length"
   putStrLn "4) exit"
-  putStrLn "your choice :"
+  putStr "your choice: "
